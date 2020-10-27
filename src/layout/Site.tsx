@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {Section} from "../Routes";
@@ -20,20 +20,34 @@ const useStyles = makeStyles((theme) => ({
 
 type Props = {
   sections: Section[]
+  children: React.ReactNode
 };
 
-const Site: React.FC<Props> = ({children, sections}) => {
+type AppContextType = {
+  isAuthenticated: boolean
+  setIsAuthenticated: (value: boolean) => void
+};
+const AppContext = React.createContext<AppContextType | undefined>(
+  undefined
+);
+export const useApp = () => React.useContext(AppContext);
+
+const Site = ({ children, sections }: Props) => {
 
   const classes = useStyles();
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (<div className={classes.root}><CssBaseline />
 
-    <Drawer sections={sections} toolbarClass={classes.toolbar} />
+    <AppContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+      <Drawer sections={sections} toolbarClass={classes.toolbar} />
 
-    <main style={{flexGrow: 1}}>
-      <div className={classes.toolbar} />
-      {children}
-    </main>
+      <main style={{flexGrow: 1}}>
+        <div className={classes.toolbar} />
+        {children}
+      </main>
+    </AppContext.Provider>
   </div>)
 };
 
