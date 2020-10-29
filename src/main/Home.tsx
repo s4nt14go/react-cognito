@@ -14,9 +14,13 @@ const useStyles = makeStyles(_theme => ({
     maxHeight: 589,
     overflowY: 'hidden',
   },
-  authenticated: {
+  always: {
     textAlign: 'center',
-    marginTop: 50,
+    marginTop: 10,
+  },
+  signedIn: {
+    textAlign: 'center',
+    marginTop: 40,
   },
   amplifySignOut: {
     width: 'fit-content',
@@ -31,8 +35,21 @@ const Home = () => {
 
   const { authData, nextAuthState } = useApp()!;
 
-  return nextAuthState === AuthState.SignedIn && authData ? (
-    <div className={classes.authenticated}>
+  const rendersAlways = () => (
+    <div className={classes.always}>
+      <Typography variant="overline">
+        Shows according the auth state
+      </Typography>
+    </div>
+  )
+
+  const renderLoading = () => (<>
+    <Loading />
+    <MyAmplifyAuthenticator /> {/* Force react to evaluate AmplifyAuthenticator when we're still waiting for auth state, it doesn't show  */}
+  </>)
+
+  const renderSignedIn = () => (
+    <div className={classes.signedIn}>
       <Typography variant="h4" gutterBottom>
         Welcome {authData.attributes.name}!
       </Typography>
@@ -40,10 +57,9 @@ const Home = () => {
         <AmplifySignOut />
       </div>
     </div>
-  ) : !nextAuthState? <>
-    <Loading />
-    <MyAmplifyAuthenticator /> {/* Force react to evaluate AmplifyAuthenticator when we're still waiting for auth state, it doesn't show  */}
-  </> :
+  )
+
+  const renderUnauth = () => (
     <div className={classes.unauthenticated}>
       <Typography variant="h4" gutterBottom>
         Hello stranger!
@@ -53,5 +69,20 @@ const Home = () => {
       </Typography>
       <MyAmplifyAuthenticator />
     </div>
+  )
+
+  return <>
+
+    {rendersAlways()}
+
+    {!nextAuthState? <>
+      {renderLoading()}
+    </> : nextAuthState === AuthState.SignedIn && authData? <>
+      {renderSignedIn()}
+    </> : <>
+      {renderUnauth()}
+    </>}
+
+  </>
 };
 export default Home;
