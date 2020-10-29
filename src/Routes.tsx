@@ -9,9 +9,13 @@ import {
   FaReact,
   ImHome3,
   GrTextAlignLeft,
+  MdPerson,
 } from "react-icons/all";
 import Paragraphs from "./main/Paragraphs";
+import Login from "./main/Login";
 import Site from "./layout/Site";
+import AuthenticatedRoute from "./component/AuthenticatedRoute";
+import UnauthenticatedRoute from "./component/UnauthenticatedRoute";
 
 const padding = {
   padding: 24,
@@ -21,29 +25,28 @@ export type Section = {
   to: string
   text: string
   icon: ReactElement
-  main: ReactElement
-  padding?: boolean
-  style?: any
 }
 
 export let sections: Section[] = [
   {
-    to: '/home',
+    to: '/',
     text: 'Home',
     icon: <ImHome3 />,
-    main: <Home />,
   },
   {
     to: '/paragraphs',
     text: 'Paragraphs',
     icon: <GrTextAlignLeft />,
-    main: <Paragraphs style={padding} />,
   },
   {
     to: '/demo',
     text: 'Demo',
     icon: <FaReact />,
-    main: <Demo />
+  },
+  {
+    to: '/login',
+    text: 'Login',
+    icon: <MdPerson />,
   },
 ];
 
@@ -53,14 +56,18 @@ const Routes: React.FC<{}> = () => {
     <Site sections={sections}>
       <Switch>
 
-        {sections.map((section, _index) => (
-          <Route path={section.to} key={section.text}>
-            {section.main}
-          </Route>
-        ))}
+        <Route exact path='/paragraphs'>
+          <Paragraphs style={padding} />
+        </Route>
+        <AuthenticatedRoute exact path='/demo'>
+          <Demo />
+        </AuthenticatedRoute>
+        <UnauthenticatedRoute exact path='/login'>
+          <Login />
+        </UnauthenticatedRoute>
 
-        <Route path='/' key={defaultSection.text}>
-          {defaultSection.main}
+        <Route path='/'>
+          <Home />
         </Route>
 
       </Switch>
