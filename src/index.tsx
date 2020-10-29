@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Routes from "./Routes";
+import { Amplify } from 'aws-amplify';
+import config from './config';
 
 const theme = createMuiTheme({
   typography: {
@@ -23,9 +25,26 @@ const theme = createMuiTheme({
       main: '#03dac6',
     },
   },*/
+  zIndex: {
+    drawer: 90  /* For some login events an Amplify built-in toast is shown with z-index: 99 at the top. As material Drawer has a default z-index: 1200, we have to override it with a lower value so the message isn't covered by it */
+  }
 });
 
-//console.log(theme);
+console.log(theme);
+
+if (process.env.REACT_APP_STAGE !== "prod") {
+  console.log('REACT_APP_STAGE', process.env.REACT_APP_STAGE);
+}
+
+Amplify.configure({
+  Auth: {
+    mandatorySignIn: true,
+    region: config.cognito.REGION,
+    userPoolId: config.cognito.USER_POOL_ID,
+    identityPoolId: config.cognito.IDENTITY_POOL_ID,
+    userPoolWebClientId: config.cognito.APP_CLIENT_ID
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>

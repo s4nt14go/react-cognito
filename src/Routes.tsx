@@ -31,7 +31,7 @@ export let sections: Section[] = [
     to: '/home',
     text: 'Home',
     icon: <ImHome3 />,
-    main: <Home style={padding} />,
+    main: <Home />,
   },
   {
     to: '/paragraphs',

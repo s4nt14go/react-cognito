@@ -10,6 +10,8 @@ import clsx from 'clsx';
 import {
   MdMenu,
 } from "react-icons/all";
+import {useApp} from "./Site";
+import {AmplifySignOut} from "@aws-amplify/ui-react";
 
 const drawerWidth = 190;
 
@@ -35,6 +37,16 @@ const useStyles = makeStyles((theme) => ({
   hide: {
     display: 'none',
   },
+  authenticated: {
+    textAlignLast: 'start',
+  },
+  amplifySignOut: {
+    width: 105,
+    overflow: 'hidden',
+    verticalAlign: 'middle',
+    display: 'inline-block',
+    marginLeft: 10,
+  },
 }));
 
 type Props = {
@@ -42,9 +54,11 @@ type Props = {
   open: boolean
 };
 
-const Bar: React.FC<Props> = ({children, handleDrawerOpen, open}) => {
+const Bar: React.FC<Props> = ({handleDrawerOpen, open}) => {
 
   const classes = useStyles();
+
+  const { isAuthenticated, authData } = useApp()!;
 
   return (
     <AppBar
@@ -65,9 +79,20 @@ const Bar: React.FC<Props> = ({children, handleDrawerOpen, open}) => {
         >
           <MdMenu />
         </IconButton>
-        <Typography variant="h6" noWrap>
+        <Typography variant="h6" noWrap style={{flexGrow: 1}}>
           Mini variant drawer
         </Typography>
+
+        { isAuthenticated && authData?
+            <div className={classes.authenticated}>
+              <span>Hello {authData.attributes?.name} 👋</span>
+              <div className={classes.amplifySignOut}>
+                <AmplifySignOut />
+              </div>
+            </div>
+          :
+            <span>You're not logged in</span>
+        }
       </Toolbar>
     </AppBar>
   )
