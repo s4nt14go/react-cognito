@@ -9,7 +9,7 @@ import {
   FaReact,
   ImHome3,
   GrTextAlignLeft,
-  MdPerson,
+  IoMdLogIn,
 } from "react-icons/all";
 import Paragraphs from "./main/Paragraphs";
 import Login from "./main/Login";
@@ -46,7 +46,7 @@ export let sections: Section[] = [
   {
     to: '/login',
     text: 'Login',
-    icon: <MdPerson />,
+    icon: <IoMdLogIn />,
   },
 ];
 
