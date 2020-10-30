@@ -1,6 +1,6 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {Grid, Typography} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import {useApp} from "../layout/Site";
 import {stringify} from "../lib/util";
@@ -23,20 +23,20 @@ const Profile: React.FC<Props> = () => {
   let authDataObj = JSON.parse(authDataStr);
 
   return <div className={classes.container}>
+
+    <Typography variant="subtitle1" style={{paddingTop: 20, paddingLeft: 154}}>
+      As Profile is wrapped with <strong>AuthenticatedRoute</strong><br />
+      you can access here only if your are authenticated
+    </Typography>
+
     <h2>Profile</h2>
 
-    <Grid container spacing={3}>
-      <Grid item>
-        <Typography variant="h4">{authData.attributes.name}</Typography>
-        <Typography variant="subtitle1">{authData.attributes.email}</Typography>
-      </Grid>
+    <Typography variant="h4">{authData.attributes.name}</Typography>
+    <Typography variant="subtitle1">{authData.attributes.email}</Typography>
 
-      <Grid item md={12}>
-        <SyntaxHighlighter language='json'>
-          {JSON.stringify(authDataObj, null, 2)}
-        </SyntaxHighlighter>
-      </Grid>
-    </Grid>
+    <SyntaxHighlighter language='json'>
+      {JSON.stringify(authDataObj, null, 2)}
+    </SyntaxHighlighter>
   </div>;
 };
 export default Profile;

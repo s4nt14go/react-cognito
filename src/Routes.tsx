@@ -1,12 +1,10 @@
 import React, {ReactElement} from 'react';
-import Demo from './main/Demo/App';
 import Home from './main/Home';
 import {
   Switch,
   Route,
 } from "react-router-dom";
 import {
-  FaReact,
   ImHome3,
   GrTextAlignLeft,
   IoMdLogIn,
@@ -17,7 +15,7 @@ import Login from "./main/Login";
 import Site from "./layout/Site";
 import AuthenticatedRoute from "./component/AuthenticatedRoute";
 import UnauthenticatedRoute from "./component/UnauthenticatedRoute";
-import Cognito from "./main/Cognito";
+import Profile from "./main/Profile";
 
 const padding = {
   padding: 24,
@@ -41,23 +39,20 @@ export let sections: Section[] = [
     icon: <GrTextAlignLeft />,
   },
   {
-    to: '/demo',
-    text: 'Demo',
-    icon: <FaReact />,
-  },
-  {
     to: '/login',
     text: 'Login',
     icon: <IoMdLogIn />,
   },
   {
-    to: '/cognito',
-    text: 'Cognito',
+    to: '/profile',
+    text: 'Profile',
     icon: <IoIosPerson />,
   },
 ];
 
-const Routes: React.FC<{}> = () => {
+type Props = {}
+
+const Routes: React.FC<Props> = () => {
 
   return (
     <Site sections={sections}>
@@ -66,14 +61,11 @@ const Routes: React.FC<{}> = () => {
         <Route exact path='/paragraphs'>
           <Paragraphs style={padding} />
         </Route>
-        <AuthenticatedRoute exact path='/demo'>
-          <Demo />
-        </AuthenticatedRoute>
         <UnauthenticatedRoute exact path='/login'>
           <Login />
         </UnauthenticatedRoute>
-        <AuthenticatedRoute exact path='/cognito'>
-          <Cognito />
+        <AuthenticatedRoute exact path='/profile'>
+          <Profile />
         </AuthenticatedRoute>
 
         <Route path='/'>
