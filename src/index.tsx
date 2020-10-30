@@ -30,7 +30,7 @@ const theme = createMuiTheme({
   }
 });
 
-console.log(theme);
+//console.log(theme);
 
 if (process.env.REACT_APP_STAGE !== "prod") {
   console.log('REACT_APP_STAGE', process.env.REACT_APP_STAGE);

@@ -10,12 +10,14 @@ import {
   ImHome3,
   GrTextAlignLeft,
   IoMdLogIn,
+  IoIosPerson,
 } from "react-icons/all";
 import Paragraphs from "./main/Paragraphs";
 import Login from "./main/Login";
 import Site from "./layout/Site";
 import AuthenticatedRoute from "./component/AuthenticatedRoute";
 import UnauthenticatedRoute from "./component/UnauthenticatedRoute";
+import Cognito from "./main/Cognito";
 
 const padding = {
   padding: 24,
@@ -48,6 +50,11 @@ export let sections: Section[] = [
     text: 'Login',
     icon: <IoMdLogIn />,
   },
+  {
+    to: '/cognito',
+    text: 'Cognito',
+    icon: <IoIosPerson />,
+  },
 ];
 
 const Routes: React.FC<{}> = () => {
@@ -65,6 +72,9 @@ const Routes: React.FC<{}> = () => {
         <UnauthenticatedRoute exact path='/login'>
           <Login />
         </UnauthenticatedRoute>
+        <AuthenticatedRoute exact path='/cognito'>
+          <Cognito />
+        </AuthenticatedRoute>
 
         <Route path='/'>
           <Home />
