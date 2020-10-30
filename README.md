@@ -11,8 +11,9 @@
 In repo [react-starter branch auth0](https://github.com/s4nt14go/react-starter/tree/auth0) I showed how can be used [Auth0](https://auth0.com) for authentication. In the case you prefer [AWS Cognito](https://aws.amazon.com/cognito) you can check here how can be done.<br />
 ### ✨ [Check the demo site](https://react-cognito.netlify.app)<br />
 Features:
-* `React.useContext` to hold authentication state and data<br />
 * [AWS Amplify](https://aws.amazon.com/amplify) to comunicate with Cognito
+* `AmplifyAuthenticator` component from library `@aws-amplify/ui-react`
+* `React.useContext` to hold authentication state and data<br />
 * Components `AuthenticatedRoute` and `UnauthenticatedRoute` protect routes according user authentication state
 * Redirect: If an unauthenticated user tries to go to an `AuthenticatedRoute`, first is directed to login and once logged in, it redirects to the intended page<br /><br />
    
