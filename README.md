@@ -1,4 +1,4 @@
-<h1 align="center">React starter with drawer menu and then some ⛵</h1>
+<h1 align="center">React using Cognito authentication 👮</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="#" target="_blank">
@@ -8,25 +8,20 @@
 
 ### Description
 
-When starting a new project, we generally use the same libraries and it's helpful to have some examples of that bunch of libraries in a working project.<br /><br />
-In the different sections of this React app you will find examples of use for these libraries you can look into before you integrate them into your project.<br /><br />
-You can checkout different tags, each of them contains more utilities to fit your needs. The tags are useful in the case you are only interested in the first basics examples. 
-### Material mini drawer layout - tag 1.0<br />
-![tag 1.0](./demo/tag1.gif)<br /><br />
-Utilities included:
-* [Material UI](https://material-ui.com) @material-ui/core
-* [React router](https://reactrouter.com/web) react-router-dom
-* [Styled components](https://styled-components.com) styled-components
-* [React icons](https://react-icons.netlify.com) react-icons
+In repo [react-starter branch auth0](https://github.com/s4nt14go/react-starter/tree/auth0) I showed how can be used [Auth0](https://auth0.com) for authentication. In the case you prefer [AWS Cognito](https://aws.amazon.com/cognito) you can check here how can be done.<br /><br />
+Features:
+* `React.useContext` to hold authentication state and data<br />
+* [AWS Amplify](https://aws.amazon.com/amplify) to comunicate with Cognito
+* Components `AuthenticatedRoute` and `UnauthenticatedRoute` protect routes according user authentication state
+* Redirect: If an unauthenticated user tries to go to an `AuthenticatedRoute`, first is directed to login and once logged in, it redirects to the intended page<br /><br />
+   
+![auth.gif](./showcase/auth.gif)<br /><br />
 
-### Instructions
-
-1. Clone the repo and `cd` into<br /><br />
-`git clone https://github.com/s4nt14go/react-starter`<br /><br />
-1. (Optional) In the case you are want to checkout one of the intermediary tags you can do it with the following command, which also starts your own branch<br /><br />
-`git checkout tags/2.0 -b my-branch`<br /><br />
-You have to replace the tag number for the one you want.<br /><br />
-1. Install dependencies<br /><br />
-`npm i`<br /><br />
-1. Run the project<br /><br />
-`npm start`
+If you want to try this on your side, you will need to deploy your Conigto user and identity pool (I will try to make another repo with this too if I have the time). Once that is deployed you will need to set their values in your `.env.local` file:
+```bash
+REACT_APP_STAGE=dev
+REACT_APP_dev_COGNITO_REGION=<your_data>
+REACT_APP_dev_COGNITO_USER_POOL_ID=<your_data>
+REACT_APP_dev_COGNITO_APP_CLIENT_ID=<your_data>
+REACT_APP_dev_COGNITO_IDENTITY_POOL_ID=<your_data>
+```
