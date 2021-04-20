@@ -9,7 +9,7 @@
 ### Description
 
 In repo [react-starter branch auth0](https://github.com/s4nt14go/react-starter/tree/auth0) I showed how can be used [Auth0](https://auth0.com) for authentication. In the case you prefer [AWS Cognito](https://aws.amazon.com/cognito) you can check here how can be done.<br />
-### ✨ [Check the demo site](https://react-cognito.netlify.app)<br />
+
 Features:
 * [AWS Amplify](https://aws.amazon.com/amplify) to comunicate with Cognito
 * `AmplifyAuthenticator` component from library `@aws-amplify/ui-react`
