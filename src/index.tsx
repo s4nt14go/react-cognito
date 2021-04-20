@@ -7,8 +7,7 @@ import {
 } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Routes from "./Routes";
-import Amplify from '@aws-amplify/core'
-import { Auth } from '@aws-amplify/auth'
+import { Amplify } from 'aws-amplify';
 import config from './config';
 
 const theme = createMuiTheme({
@@ -37,19 +36,14 @@ if (process.env.REACT_APP_STAGE !== "prod") {
   console.log('REACT_APP_STAGE', process.env.REACT_APP_STAGE);
 }
 
-console.log(config.cognito);
-const auth = {
-  mandatorySignIn: true,
-  region: config.cognito.REGION,
-  userPoolId: config.cognito.USER_POOL_ID,
-  identityPoolId: config.cognito.IDENTITY_POOL_ID,
-  userPoolWebClientId: config.cognito.APP_CLIENT_ID
-};
 Amplify.configure({
-  Auth: auth,
-});
-Auth.configure({
-  Auth: auth,
+  Auth: {
+    mandatorySignIn: true,
+    region: config.cognito.REGION,
+    userPoolId: config.cognito.USER_POOL_ID,
+    identityPoolId: config.cognito.IDENTITY_POOL_ID,
+    userPoolWebClientId: config.cognito.APP_CLIENT_ID
+  },
 });
 
 ReactDOM.render(
