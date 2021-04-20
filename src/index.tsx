@@ -36,6 +36,7 @@ if (process.env.REACT_APP_STAGE !== "prod") {
   console.log('REACT_APP_STAGE', process.env.REACT_APP_STAGE);
 }
 
+console.log(config.cognito);
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,
