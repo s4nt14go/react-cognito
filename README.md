@@ -1,10 +1,7 @@
 <h1 align="center">React using Cognito authentication 👮 </h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <a href="#" target="_blank">
-    <img alt="License: ISC" src="https://img.shields.io/badge/License-ISC-yellow.svg" />
-  </a>
-</p>
+<a href="https://app.netlify.com/sites/react-cognito/deploys">
+  <img src="https://api.netlify.com/api/v1/badges/bf2dc215-19ee-4fa8-a658-62bb1210a266/deploy-status" />
+</a>
 
 ### Description
 
@@ -19,11 +16,36 @@ Features:
    
 ![auth.gif](./showcase/auth.gif)<br /><br />
 
-If you want to try this on your side, you will need to deploy your Conigto user and identity pool (I will try to make another repo with this too if I have the time). Once that is deployed you will need to set their values in your `.env.local` file:
-```bash
-REACT_APP_STAGE=dev
-REACT_APP_dev_COGNITO_REGION=<your_data>
-REACT_APP_dev_COGNITO_USER_POOL_ID=<your_data>
-REACT_APP_dev_COGNITO_APP_CLIENT_ID=<your_data>
-REACT_APP_dev_COGNITO_IDENTITY_POOL_ID=<your_data>
-```
+#### Instructions
+
+1. Use Node 14 version, using [nvm](https://github.com/nvm-sh/nvm) you can:
+
+    ```
+    # set Node 14 in current terminal
+    nvm use 14
+    # set Node 14 as default (new terminals will use 14)
+    nvm alias default 14
+    ```
+
+1. Install dependencies
+
+    ```shell script
+    npm ci
+    ```
+
+1. Deploy your Cognito user and identity pool `dev` stage as in this [repo](https://github.com/s4nt14go/react-cognito-back). Once that is deployed you will need to set their values in your `.env.local` file:
+    
+   ```bash
+    REACT_APP_STAGE=dev
+    REACT_APP_dev_COGNITO_REGION=<your_data>
+    REACT_APP_dev_COGNITO_USER_POOL_ID=<your_data>
+    REACT_APP_dev_COGNITO_APP_CLIENT_ID=<your_data>
+    REACT_APP_dev_COGNITO_IDENTITY_POOL_ID=<your_data>
+    ```
+    > In the case you change these env vars, you have to restart your React server and refresh the page in order to have them refreshed.
+
+1. Run the app
+
+    ```shell script 
+    npm start
+    ```
